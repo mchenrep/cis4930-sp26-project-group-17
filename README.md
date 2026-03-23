@@ -1,9 +1,9 @@
 # CIS4930 (Introduction to Python) Group 17 Project
 
 ## Group Members
-Matthew Chen - mchenrep
-Luke Salem - lukehsalem
-Eric Pengili - sicc-ranchezz
+Matthew Chen - mchenrep 
+Luke Salem - lukehsalem 
+Eric Pengili - sicc-ranchezz 
 
 ## NBA Best Players For Each Statistic Summary (2000-2009)
 This project summarizes the best players for each advanced statistic (Total points, rebounds, 3 pointers made, etc.) during the 2000-2009 seasons. In the real world, these statistics can help us understand which player was the "best" in each category to determine which position a player should play optimally. Additionally, the data can tell us more about how important players are to each team and which players dominate the game in general.
