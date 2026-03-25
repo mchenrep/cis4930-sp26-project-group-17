@@ -13,6 +13,13 @@ The data used for this project comes from: [kaggle](https://www.kaggle.com/datas
 
 Credit goes to Kaggle user bilgehanyaylali
 
+## Dataset Justification
+This dataset fits the requirements as it has
+- 1890 rows (combined)
+- 4+ numeric columns
+- 2 categorical columns
+- Has real world context
+
 ## Research Questions
 1. Who scored the best player (most efficient)?
 2. Which positions are most efficient?
