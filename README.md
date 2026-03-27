@@ -26,3 +26,6 @@ This dataset fits the requirements as it has
 3. What does the distribution of efficiency look like?
 4. Are scoring and efficiency related?
 
+## Contributions
+Matthew Chen - Data loading, cleaning, and transformation (aggregation, grouping, reshaping, etc.)
+
