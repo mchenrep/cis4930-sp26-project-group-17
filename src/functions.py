@@ -16,4 +16,4 @@ def summarize_group(df, group_col, metric_cols):
 
 def top_players_by_metric(df, metric, n=10, min_mp=500):
     subset = df[df["MP"] >= min_mp].copy()
-    return subset.sort_values(metric, ascending=False)[["Player", "Year", "Pos", "Tm", metric, "MP"]].head(n)
+    return subset.sort_values(metric, ascending=False)[[["PLAYER", "year_str", "POS", "TEAM", metric, "MP"]]].head(n)
