@@ -31,5 +31,5 @@ This dataset fits the requirements as it has
 Matthew Chen - Data loading, cleaning, and transformation (aggregation, grouping, reshaping, etc.)  
 Luke Salem - EDA, Open-ended creativity bonus (with Position feature)  
 Tony Guillen - Data Visualization  
-Eric Pengili - Github File Structure, Code Review, functions.py and nba_analysis.py  
+Eric Pengili - Github File Structure, Code Review, functions.py and nba_analysis.py, and Alternative analysis.ipynb
 
