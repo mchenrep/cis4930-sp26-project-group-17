@@ -28,6 +28,8 @@ This dataset fits the requirements as it has
 4. Are scoring and efficiency related?
 
 ## Contributions
-Matthew Chen - Data loading, cleaning, and transformation (aggregation, grouping, reshaping, etc.)
-Luke Salem - EDA, Open-ended creativity bonus (with Position feature)
+Matthew Chen - Data loading, cleaning, and transformation (aggregation, grouping, reshaping, etc.)  
+Luke Salem - EDA, Open-ended creativity bonus (with Position feature)  
+Tony Guillen - Data Visualization
+Eric Pengili - Github File Structure, Code Review, functions.py and nba_analysis.py  
 
