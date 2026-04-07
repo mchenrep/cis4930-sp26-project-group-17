@@ -1,6 +1,13 @@
+import requests
+import logging
+
+logging.basicConfig(
+    filename = "log\errors.log",
+    level= logging.INFO,
+    format = "%(asctime)s %(levelname)s %(message)s"
+)
+
 def main():
-    import requests
-    
     # Set up base url and parameters
     BASE_URL = "https://api.github.com/search/repositories"
     params = {"q": "basketball", "per_page": 10, "page": 1} # 10 pages per run
@@ -31,9 +38,9 @@ def main():
         }
 
     except requests.exceptions.Timeout:
-        print("Request timed out")
+        logging.exception("Request timed out")
     except requests.exceptions.RequestException as e:
-        print("Request error:", e)  
+        logging.exception(f"Request error: {e}")
 
 if __name__ == "__main__":
     main()
