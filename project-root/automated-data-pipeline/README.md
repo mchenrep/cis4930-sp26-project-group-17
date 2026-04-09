@@ -16,3 +16,7 @@ This project collects important data about basketball related repositories on Gi
 1. Fetch 10 pages of repositories per run
 2. Store results in an CSV File or SQLite database
 3. Handle failures and log errors
+
+## Contributions
+Matthew Chen - file structure, Github repository, README, handling API, logging errors
+Tony Guillen - transforming API response into dataframe, saving data into local .csv file, better repository fetching, helper functions
