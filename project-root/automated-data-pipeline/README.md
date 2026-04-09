@@ -18,5 +18,5 @@ This project collects important data about basketball related repositories on Gi
 3. Handle failures and log errors
 
 ## Contributions
-Matthew Chen - file structure, Github repository, README, handling API, logging errors
-Tony Guillen - transforming API response into dataframe, saving data into local .csv file, better repository fetching, helper functions
+Matthew Chen - handling API, file structure, Github repository, logging, handling errors
+Tony Guillen - transforming API response into data, storing data, improved API response fetching, helper functions
