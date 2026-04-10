@@ -21,3 +21,4 @@ This project collects important data about basketball related repositories on Gi
 Matthew Chen - handling API, file structure, Github repository, logging, handling errors  
 Tony Guillen - transforming API response into data, storing data, improved API response fetching, helper functions
 Eric Pengili - apiclient.py and storage.py
+Luke Salem - implemented advanced error checking, logging, retries, and CLI arguments (as extra credit)
