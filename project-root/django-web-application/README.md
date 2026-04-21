@@ -37,10 +37,16 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
 5. Finally, run the server locally with `python manage.py runserver`
 
 ## Screenshots
-TO BE IMPLEMENTED
+TO BE IMPLEMENTED  
 Homepage
 
 List View
 
 Analytics Dashboard
+
+## Contributions
+Matthew Chen - Framework Setup/Repository Structure, README, URL routing, API-Integration  
+X - CRUD-views, CSS/Bootstrap-UI  
+X - Models-ORM, Analytics Dashboard  
+X - Settings-Deploy, Extra Credit
 
