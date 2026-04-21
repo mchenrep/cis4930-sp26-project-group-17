@@ -28,3 +28,19 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
     - Summary statistics table of basketball data from the dataset (which includes count, mean, min, max)
 - UI
     - Implements Bootstrap 5 UI features and CSS to style pages
+
+## Setup Instructions
+1. First clone the repository with `git clone repositoryURL`
+2. Install the requirements/dependencies with `pip install -r requirements.txt`
+3. Migrate all models with `python manage.py migrate`
+4. Seed data with `python manage.py seed_data`
+5. Finally, run the server locally with `python manage.py runserver`
+
+## Screenshots
+TO BE IMPLEMENTED
+Homepage
+
+List View
+
+Analytics Dashboard
+
