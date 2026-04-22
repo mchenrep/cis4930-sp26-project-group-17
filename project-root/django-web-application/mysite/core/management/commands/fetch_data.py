@@ -86,5 +86,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         items = fetch_repositories()
         df = transform_to_dataframe(items)
-        save_dataframe(df)
+        save_dataframe(df) # records are saved using Django ORM in seed_data.py
         self.stdout.write(self.style.SUCCESS(f"Saved {len(df)} rows to core/data/repos.csv"))
