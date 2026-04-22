@@ -12,10 +12,10 @@ class Command(BaseCommand):
                 repo_name = row["repo_name"],
                 defaults = {
                     "username" : row["username"],
-                    "stars" : int(row["stargazers_count"]),
+                    "stars" : int(row["stars"]),
                     "language" : row["language"],
                     "url": row["repo_url"],
-                    "created_at": row["created_at"] if pd.notna(row["created_at"]) else None
+                    "created_at": row["date_created"] if pd.notna(row["date_created"]) else None
                 }
             )
         self.stdout.write(self.style.SUCCESS("Data loaded"))

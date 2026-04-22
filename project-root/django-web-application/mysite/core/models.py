@@ -10,4 +10,4 @@ class Repository(models.Model):
     created_at = models.CharField(max_length=1000) # kept as charfield to make integrating data easier
 
     def __str__(self):
-        return f"Repository Name: {self.repo_name}\nUsername: {self.username}\nStars: {self.stars}\nLanguage: {self.language}\nURL: {self.url}\nCreated: {self.created_at}"
+        return f"{self.repo_name} ({self.stars})"

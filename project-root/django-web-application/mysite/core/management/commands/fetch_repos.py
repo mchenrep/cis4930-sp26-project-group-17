@@ -68,14 +68,22 @@ def transform_to_dataframe(items):
     return pd.DataFrame(records)
 
 def save_dataframe(df, output_file="repos.csv"):
-    current_dir = Path(__file__).resolve().parent
-    full_path = current_dir.parent / "data" / output_file
+    # Path to the core/ directory
+    core_dir = Path(__file__).resolve().parents[2]
+
+    # Path to core/data/
+    data_dir = core_dir / "data"
+    data_dir.mkdir(exist_ok=True)  # create if missing
+
+    # Final file path
+    full_path = data_dir / output_file
+
     df.to_csv(full_path, index=False)
 
 class Command(BaseCommand):
     help = "Fetch GitHub repos and save to core/data/repos.csv"
 
-    def handle(self):
+    def handle(self, *args, **options):
         items = fetch_repositories()
         df = transform_to_dataframe(items)
         save_dataframe(df)
