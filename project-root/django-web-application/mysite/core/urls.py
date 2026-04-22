@@ -6,8 +6,8 @@ urlpatterns = [
     path("/", views.home, name="home"),
     path("/analytics", views.analytics, name="analytics"),
     path("/listview", views.RepostioryListView.as_view(), name="repo_list"),
-    path("/list/", ),
-    path("/list/create/", views.list_create),
-    path("/list/update/", views.list_update),
-    path("/list/delete/", views.list_delete),
+    path("/list/<int:pk>", views.RepositoryDetailView.as_view(), name="repo_detail"),
+    path("/list/create/", views.list_create, name="list_create"),
+    path("/list/update/", views.list_update, name="list_update"),
+    path("/list/delete/", views.list_delete, name="list_delete"),
 ]
