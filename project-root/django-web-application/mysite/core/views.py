@@ -21,14 +21,14 @@ class RepositoryDetailView(DetailView):
 
 def list_create(request):
     if request.method == "POST":
-        repo = RepoForm(request.POST)
+        form = RepoForm(request.POST)
         if form.is_valid():
             repo = form.save()
-            return redirect("detail", pk = repo.pk)
+            return redirect("repo_detail", pk = repo.pk)
     else:
         # GET
         form = RepoForm()
-        return render(request, "core/form.html", {"form": form})
+    return render(request, "core/form.html", {"form": form})
 
 def list_update(request, pk):
     repo = get_object_or_404(Repository, pk=pk)
@@ -36,8 +36,11 @@ def list_update(request, pk):
         form = RepoForm(request.POST, instance=repo)
         if form.is_valid():
             form.save()
-            return redirect(request, pk = repo.pk)
-    return render(request, "core/form.html")
+            return redirect("repo_detail", pk = repo.pk)
+    else:
+        # GET
+        form = RepoForm()
+    return render(request, "core/form.html", {"form": form})
 
 def list_delete(request, pk):
     repo = get_object_or_404(Repository, pk=pk)

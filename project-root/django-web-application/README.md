@@ -30,11 +30,12 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
     - Implements Bootstrap 5 UI features and CSS to style pages
 
 ## Setup Instructions
-1. First clone the repository with `git clone repositoryURL`
-2. Install the requirements/dependencies with `pip install -r requirements.txt`
-3. Migrate all models with `python manage.py migrate`
-4. Seed data with `python manage.py seed_data`
-5. Finally, run the server locally with `python manage.py runserver`
+1. First clone the repository with `git clone repositoryURL`  
+2. Install the requirements/dependencies with `pip install -r requirements.txt`  
+3. Migrate all models with `python manage.py migrate` 
+4. Get API data with `python manage.py fetch_repos` 
+5. Load models with `python manage.py load_data`
+6. Finally, run the server locally with `python manage.py runserver`
 
 ## Screenshots
 TO BE IMPLEMENTED  
