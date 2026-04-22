@@ -45,8 +45,5 @@ List View
 Analytics Dashboard
 
 ## Contributions
-Matthew Chen - Framework Setup/Repository Structure, README, URL routing, API-Integration  
-X - CRUD-views, CSS/Bootstrap-UI  
-X - Models-ORM, Analytics Dashboard  
-X - Settings-Deploy, Extra Credit
+Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM
 

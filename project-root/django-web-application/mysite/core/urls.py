@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path("/", views.home, name="home"),
     path("/analytics", views.analytics, name="analytics"),
-    path("/listview", ),
+    path("/listview", views.RepostioryListView.as_view(), name="repo_list"),
     path("/list/", ),
     path("/list/create/", views.list_create),
     path("/list/update/", views.list_update),
