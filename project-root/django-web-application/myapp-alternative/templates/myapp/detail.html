@@ -1,0 +1,14 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h2>{{ item.name }}</h2>
+    <p><strong>Category:</strong> {{ item.category|default:"None" }}</p>
+    <p><strong>Value:</strong> ${{ item.value }}</p>
+    <p>{{ item.description }}</p>
+    <a class="button" href="{% url 'item_update' item.pk %}">Edit</a>
+    <a class="button danger" href="{% url 'item_delete' item.pk %}">Delete</a>
+</section>
+{% endblock %}
