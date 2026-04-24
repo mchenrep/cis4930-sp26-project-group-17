@@ -1,0 +1,14 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Item Form{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h2>Item Form</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</section>
+{% endblock %}

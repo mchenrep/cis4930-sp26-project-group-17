@@ -1,0 +1,15 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Delete Item{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h2>Delete Item</h2>
+    <p>Are you sure you want to delete "{{ item.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="danger" type="submit">Confirm Delete</button>
+        <a class="button" href="{% url 'item_detail' item.pk %}">Cancel</a>
+    </form>
+</section>
+{% endblock %}
