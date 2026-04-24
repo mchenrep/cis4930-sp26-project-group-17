@@ -1,12 +1,10 @@
 import json
-
 import pandas as pd
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-
-from .models import Repository, User, Language
+from .models import Repository, User, Language, NbaStat, AnalysisLog
 from .forms import RepositoryForm
 
 
@@ -115,13 +113,8 @@ def analytics(request):
     df = pd.DataFrame(list(qs))
 
     # Fallback for empty DB
-    if df.empty:
-        return render(request, 'core/analytics.html', {
-            'summary': {},
-            'top_repos_json': json.dumps({'labels': [], 'values': []}),
-            'language_json': json.dumps({'labels': [], 'values': []}),
-            'empty': True,
-        })
+    if df.empty and NbaStat.objects.count() == 0:
+        return render(request, 'core/analytics.html', {'empty': True, 'nba_empty': True})
 
     # --- Aggregation 1: top 10 repos by stars (bar chart) ---
     top_repos = df.nlargest(10, 'stars')
@@ -170,10 +163,43 @@ def analytics(request):
                 'min': row['min'],
                 'max': row['max'],
             }
+            
+    # NBA Data Processing
+    qs_nba = NbaStat.objects.all().values('player', 'year', 'pts', 'eff', 'ast', 'reb')
+    df_nba = pd.DataFrame(list(qs_nba))
+
+    # Initialize defaults if data has not loaded
+    nba_context = {
+        'trend_labels': json.dumps([]),
+        'trend_values': json.dumps([]),
+        'team_labels': json.dumps([]),
+        'team_values': json.dumps([]),
+        'nba_summary_stats': {},
+        'nba_empty': True,
+    }
+
+    if not df_nba.empty: # Group by year (via line chart)
+        yearly_trend = df_nba.groupby('year')['pts'].mean().round(2)
+        top_10_eff = df_nba.nlargest(10, 'eff') # Top 10 by Efficiency (via bar chart)
+        
+        nba_context.update({
+            'trend_labels': json.dumps(yearly_trend.index.tolist()),
+            'trend_values': json.dumps(yearly_trend.values.tolist()),
+            'team_labels': json.dumps([f"{row['player']} ({row['year']})" for _, row in top_10_eff.iterrows()]),
+            'team_values': json.dumps(top_10_eff['eff'].tolist()),
+            'nba_summary_stats': df_nba[['pts', 'ast', 'reb', 'eff']].describe().round(2).to_dict(),
+            'nba_empty': False,
+        })
+
+    # Fetch logs
+    logs = AnalysisLog.objects.all().order_by('-date_created')
 
     return render(request, 'core/analytics.html', {
         'summary': summary,
         'top_repos_json': json.dumps(top_repos_data),
         'language_json': json.dumps(language_data),
-        'empty': False,
+        'empty': df.empty,
+
+        **nba_context, 
+        'logs': logs,
     })

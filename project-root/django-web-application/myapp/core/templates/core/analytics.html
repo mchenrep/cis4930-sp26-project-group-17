@@ -89,6 +89,102 @@
     </div>
 </div>
 
+{% if not nba_empty %}
+<hr class="my-5">
+<h2 class="mb-4">NBA Player Efficiency Analytics</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">
+            <i class="bi bi-calculator"></i> NBA Summary Statistics
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Metric</th>
+                        <th class="text-end">Count</th>
+                        <th class="text-end">Mean</th>
+                        <th class="text-end">Min</th>
+                        <th class="text-end">Max</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for field, values in nba_summary_stats.items %}
+                    <tr>
+                        <th scope="row">{{ field|upper }}</th>
+                        <td class="text-end">{{ values.count|floatformat:0 }}</td>
+                        <td class="text-end">{{ values.mean|floatformat:2 }}</td>
+                        <td class="text-end">{{ values.min|floatformat:2 }}</td>
+                        <td class="text-end">{{ values.max|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-graph-up text-danger"></i> Average Points by Year
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="nbaTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-trophy-fill text-warning"></i> Top 10 by Efficiency
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="nbaEffChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<hr class="my-5">
+<h2 class="mb-4">Project Insights</h2>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-journal-text"></i> Analysis Logs</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for log in logs %}
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ log.title }}</strong>
+                    <small class="text-muted">{{ log.date_created|date:"M d, Y" }}</small>
+                </div>
+                {% if log.is_favorite %}
+                    <span class="badge bg-warning text-dark mb-2 mt-1">Favorite</span>
+                {% endif %}
+                <p class="mb-0 mt-1">{{ log.content }}</p>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">No logs found. Add some in the Django Admin panel!</li>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endif %}
 {% endblock %}
 
