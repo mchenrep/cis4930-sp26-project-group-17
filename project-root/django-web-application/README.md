@@ -48,4 +48,6 @@ Analytics Dashboard
 ## Contributions
 Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM
 Tony Guillen - implemented bootsrap 5 ui and css to style the pages
+Eric Pengili - Security, settings, deployment readiness
+Luke Salem - Analytics Dashboard and added second and third models along with the seed script and analytics.html contributions
 
