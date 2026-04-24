@@ -1,0 +1,147 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ repo.repo_name }} &middot; Repo Explorer{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'repo_list' %}">Repositories</a></li>
+        <li class="breadcrumb-item active">{{ repo.repo_name }}</li>
+    </ol>
+</nav>
+
+<!-- Repo header card -->
+<div class="card player-header shadow-sm mb-4">
+    <div class="card-body d-flex flex-wrap align-items-center gap-3">
+        <div class="player-avatar">
+            <i class="bi bi-git"></i>
+        </div>
+        <div class="flex-grow-1">
+            <h1 class="card-title mb-1">{{ repo.repo_name }}</h1>
+            <p class="text-muted mb-0">
+                <i class="bi bi-person-circle"></i>
+                {{ repo.owner.username }}
+                {% if repo.language %}
+                    &middot;
+                    <span class="badge lang-badge">{{ repo.language.name }}</span>
+                {% endif %}
+            </p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="{{ repo.url }}" target="_blank" rel="noopener"
+               class="btn btn-outline-primary">
+                <i class="bi bi-box-arrow-up-right"></i> GitHub
+            </a>
+            <a href="{% url 'repo_edit' repo.pk %}" class="btn btn-outline-secondary">
+                <i class="bi bi-pencil"></i> Edit
+            </a>
+            <a href="{% url 'repo_delete' repo.pk %}" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i> Delete
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Stat breakdown cards -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-4">
+        <div class="card stat-card h-100 text-center highlight">
+            <div class="card-body">
+                <div class="stat-label">Stars</div>
+                <div class="stat-number">
+                    <i class="bi bi-star-fill"></i> {{ repo.stars }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <div class="card stat-card h-100 text-center">
+            <div class="card-body">
+                <div class="stat-label">Language</div>
+                <div class="stat-number">
+                    {% if repo.language %}{{ repo.language.name }}{% else %}&mdash;{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="card stat-card h-100 text-center">
+            <div class="card-body">
+                <div class="stat-label">Created</div>
+                <div class="stat-number">
+                    {% if repo.created_at %}{{ repo.created_at|date:"M j, Y" }}{% else %}&mdash;{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed info table -->
+<div class="card shadow-sm">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">Repository Details</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0">
+            <tbody>
+                <tr>
+                    <th scope="row" style="width: 30%;">Full Name</th>
+                    <td>{{ repo.owner.username }}/{{ repo.repo_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">URL</th>
+                    <td>
+                        <a href="{{ repo.url }}" target="_blank" rel="noopener">
+                            {{ repo.url }}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Stars</th>
+                    <td>{{ repo.stars }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Language</th>
+                    <td>
+                        {% if repo.language %}
+                            {{ repo.language.name }}
+                        {% else %}
+                            <span class="text-muted">Not specified</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Created</th>
+                    <td>
+                        {% if repo.created_at %}
+                            {{ repo.created_at|date:"F j, Y" }}
+                        {% else %}
+                            <span class="text-muted">Unknown</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Data Source</th>
+                    <td>
+                        <span class="badge {% if repo.source == 'api' %}bg-success{% else %}bg-secondary{% endif %}">
+                            {{ repo.get_source_display }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Imported</th>
+                    <td>{{ repo.fetched_at|date:"F j, Y, g:i a" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'repo_list' %}" class="btn btn-link">
+        <i class="bi bi-arrow-left"></i> Back to all repositories
+    </a>
+</div>
+{% endblock %}
