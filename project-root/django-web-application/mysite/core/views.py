@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Repository
+from .models import Repository, NbaStat
 from .forms import RepoForm
+import json
 import pandas as pd
 
 # Define views
@@ -50,5 +51,28 @@ def list_delete(request, pk):
     return render(request, "core/confirm_delete.html", {"repo": repo})
 
 def analytics(request):
-    # To be implemented
-    return render(request, "core/analytics.html")
+    qs = NbaStat.objects.all().values('player', 'year', 'pts', 'eff', 'ast', 'reb')
+    df = pd.DataFrame(list(qs))
+
+    if df.empty:
+        return render(request, "core/analytics.html", {"error": "NBA Data not loaded."})
+
+    # League average points over time (via line chart)
+    yearly_trend = df.groupby('year')['pts'].mean().round(2)
+
+    # Top 10 Most Efficient Seasons (via bar chart)
+    top_10_eff = df.nlargest(10, 'eff')
+    top_10_labels = [f"{row['player']} ({row['year']})" for index, row in top_10_eff.iterrows()]
+    top_10_values = top_10_eff['eff'].tolist()
+
+    # Summary stats table
+    summary_stats = df[['pts', 'ast', 'reb', 'eff']].describe().round(2).to_dict()
+
+    context = {
+        'trend_labels': json.dumps(yearly_trend.index.tolist()),
+        'trend_values': json.dumps(yearly_trend.values.tolist()),
+        'team_labels': json.dumps(top_10_labels), 
+        'team_values': json.dumps(top_10_values),
+        'summary_stats': summary_stats,
+    }
+    return render(request, "core/analytics.html", context)

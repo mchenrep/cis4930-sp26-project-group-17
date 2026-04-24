@@ -1,0 +1,112 @@
+{% extends "core/base.html" %}
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">NBA Data Analytics Dashboard</h1>
+    
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">League Average Points (2000-2009)</h5>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 10 Most Efficient Player Seasons</h5>
+                        <canvas id="teamChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mt-4 mb-5">
+            <div class="card-body">
+                <h5 class="card-title">Summary Statistics</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Points (PTS)</th>
+                                <th>Assists (AST)</th>
+                                <th>Rebounds (REB)</th>
+                                <th>Efficiency (EFF)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Count</strong></td>
+                                <td>{{ summary_stats.pts.count }}</td>
+                                <td>{{ summary_stats.ast.count }}</td>
+                                <td>{{ summary_stats.reb.count }}</td>
+                                <td>{{ summary_stats.eff.count }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mean</strong></td>
+                                <td>{{ summary_stats.pts.mean }}</td>
+                                <td>{{ summary_stats.ast.mean }}</td>
+                                <td>{{ summary_stats.reb.mean }}</td>
+                                <td>{{ summary_stats.eff.mean }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Max</strong></td>
+                                <td>{{ summary_stats.pts.max }}</td>
+                                <td>{{ summary_stats.ast.max }}</td>
+                                <td>{{ summary_stats.reb.max }}</td>
+                                <td>{{ summary_stats.eff.max }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    {% if not error %}
+    // Render the Line Chart
+    const trendCtx = document.getElementById('trendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'line',
+        data: {
+            labels: {{ trend_labels|safe }},
+            datasets: [{
+                label: 'Avg PTS',
+                data: {{ trend_values|safe }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.1,
+                fill: true
+            }]
+        }
+    });
+
+    // Render the Bar Chart
+    const teamCtx = document.getElementById('teamChart').getContext('2d');
+    new Chart(teamCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ team_labels|safe }},
+            datasets: [{
+                label: 'Efficiency (EFF)',
+                data: {{ team_values|safe }},
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+    {% endif %}
+</script>
+{% endblock %}
