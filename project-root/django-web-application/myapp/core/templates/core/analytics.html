@@ -1,0 +1,152 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Analytics &middot; Repo Explorer{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h1>Analytics Dashboard</h1>
+    <p class="text-muted">
+        Pandas-powered aggregations over {{ summary.Stars.count|default:0|floatformat:0 }} repositories.
+    </p>
+</div>
+
+{% if empty %}
+<div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No data yet.
+    Run <code>python manage.py seed_data</code> to load the CSV, or
+    <code>python manage.py fetch_data</code> to pull from the GitHub API.
+</div>
+{% else %}
+
+<!-- Summary statistics -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">
+            <i class="bi bi-calculator"></i> Summary Statistics
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Metric</th>
+                        <th class="text-end">Count</th>
+                        <th class="text-end">Mean</th>
+                        <th class="text-end">Min</th>
+                        <th class="text-end">Max</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for field, values in summary.items %}
+                    <tr>
+                        <th scope="row">{{ field }}</th>
+                        <td class="text-end">{{ values.count|floatformat:0 }}</td>
+                        <td class="text-end">{{ values.mean|floatformat:2 }}</td>
+                        <td class="text-end">{{ values.min|floatformat:0 }}</td>
+                        <td class="text-end">{{ values.max|floatformat:0 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Charts row -->
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-bar-chart-fill text-primary"></i>
+                    Top 10 Repositories by Stars
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="topReposChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-pie-chart-fill text-success"></i>
+                    Repos by Language
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="languageChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+{% if not empty %}
+<script>
+    const topReposData = {{ top_repos_json|safe }};
+    const languageData = {{ language_json|safe }};
+
+    // Chart 1: top repos by stars (horizontal bar)
+    new Chart(document.getElementById('topReposChart'), {
+        type: 'bar',
+        data: {
+            labels: topReposData.labels,
+            datasets: [{
+                label: 'Stars',
+                data: topReposData.values,
+                backgroundColor: 'rgba(13, 110, 253, 0.7)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, title: { display: true, text: 'Stars' } }
+            }
+        }
+    });
+
+    // Chart 2: language distribution (doughnut)
+    new Chart(document.getElementById('languageChart'), {
+        type: 'doughnut',
+        data: {
+            labels: languageData.labels,
+            datasets: [{
+                data: languageData.values,
+                backgroundColor: [
+                    'rgba(13, 110, 253, 0.8)',
+                    'rgba(220, 53, 69, 0.8)',
+                    'rgba(25, 135, 84, 0.8)',
+                    'rgba(255, 193, 7, 0.8)',
+                    'rgba(102, 16, 242, 0.8)',
+                    'rgba(253, 126, 20, 0.8)',
+                    'rgba(32, 201, 151, 0.8)',
+                    'rgba(111, 66, 193, 0.8)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' } }
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

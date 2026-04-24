@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Repo Explorer - Custom Overrides
+   5 meaningful Bootstrap customizations beyond simple color swaps.
+   ========================================================================== */
+
+/* Root tokens - consistent theming across components */
+:root {
+    --brand-primary: #24292f;       /* GitHub dark */
+    --brand-accent:  #0969da;       /* GitHub blue */
+    --brand-gold:    #f7b500;
+    --brand-surface: #f6f8fa;
+    --brand-radius:  12px;
+    --brand-shadow:  0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+body {
+    background-color: var(--brand-surface);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main.container {
+    flex: 1 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   1. NAVBAR - custom brand spacing, animated underline on active link,
+      backdrop blur for a modern sticky feel.
+   -------------------------------------------------------------------------- */
+.navbar {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    backdrop-filter: blur(6px);
+    background-color: rgba(20, 24, 35, 0.95) !important;
+}
+
+.navbar-brand {
+    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    position: relative;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: color 0.2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.35rem;
+    height: 2px;
+    background: var(--brand-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover::after,
+.navbar-dark .navbar-nav .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   2. CARDS - rounded corners, lift-on-hover, custom header treatment.
+   -------------------------------------------------------------------------- */
+.card {
+    border: none;
+    border-radius: var(--brand-radius);
+    box-shadow: var(--brand-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card {
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+.card-header {
+    border-bottom: 1px solid #eef0f4;
+    border-top-left-radius: var(--brand-radius) !important;
+    border-top-right-radius: var(--brand-radius) !important;
+    padding: 1rem 1.25rem;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLES - elevated surface, uppercase headers, improved row rhythm,
+      custom language badges.
+   -------------------------------------------------------------------------- */
+.stats-table {
+    border-radius: var(--brand-radius);
+    overflow: hidden;
+    box-shadow: var(--brand-shadow);
+    background: white;
+    margin-bottom: 0;
+}
+
+.stats-table thead th {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.6px;
+    padding: 0.9rem 0.75rem;
+    border-bottom: none;
+}
+
+.stats-table tbody td {
+    padding: 0.85rem 0.75rem;
+    vertical-align: middle;
+}
+
+.stats-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.lang-badge {
+    background: var(--brand-accent);
+    color: white;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 0.4em 0.7em;
+}
+
+/* --------------------------------------------------------------------------
+   4. FORMS - larger touch targets, brand-colored focus ring,
+      label emphasis, consistent button sizing.
+   -------------------------------------------------------------------------- */
+.form-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #334155;
+    margin-bottom: 0.4rem;
+}
+
+.form-control,
+.form-select {
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid #d8dde5;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--brand-accent);
+    box-shadow: 0 0 0 0.2rem rgba(9, 105, 218, 0.15);
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.1rem;
+    font-weight: 500;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. PAGE SECTIONS - hero gradient, stat-card typography,
+      chart containers, footer behaviour.
+   -------------------------------------------------------------------------- */
+.hero-section {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, #1b2735 100%);
+    color: white;
+    box-shadow: var(--brand-shadow);
+}
+
+.hero-section .lead {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.92;
+}
+
+.quick-stats {
+    background: white;
+    box-shadow: var(--brand-shadow);
+}
+
+.stat-card {
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.stat-card.highlight {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+    color: white;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--brand-primary);
+}
+
+.stat-card.highlight .stat-number {
+    color: white;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #64748b;
+    margin-bottom: 0.35rem;
+}
+
+.stat-card.highlight .stat-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Repo detail header */
+.player-header {
+    border-left: 5px solid var(--brand-accent);
+}
+
+.player-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+}
+
+/* Chart container - constrains height so charts don't overflow */
+.chart-wrapper {
+    position: relative;
+    height: 320px;
+}
+
+/* Footer sticks to bottom even on short pages */
+.app-footer {
+    flex-shrink: 0;
+}
+
+/* Pagination visual tweaks */
+.pagination .page-link {
+    color: var(--brand-accent);
+    border-radius: 6px;
+    margin: 0 3px;
+    border: 1px solid #e2e8f0;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--brand-accent);
+    border-color: var(--brand-accent);
+}
+
+/* Breadcrumb spacing */
+.breadcrumb {
+    background: transparent;
+    padding-left: 0;
+}
+
+/* Responsive polish for small screens */
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 2rem 1rem !important;
+    }
+    .hero-section .display-4 {
+        font-size: 2rem;
+    }
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
