@@ -47,6 +47,9 @@ Analytics Dashboard
 Security (manage.py check --deploy)
 ![Deploy Check](screenshots/securitycheck.png)  
 
+## Project Demonstration
+Matthew Chen - [Youtube Link](https://youtu.be/9kQBsbywEdc)
+
 ## Contributions
 Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
 Tony Guillen - Templates HTML Implementation, Bootstrap 5 UI, CSS, Charts  
