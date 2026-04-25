@@ -33,8 +33,8 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
 1. First clone the repository with `git clone repositoryURL`  
 2. Install the requirements/dependencies with `pip install -r requirements.txt`  
 3. Migrate all models with `python manage.py migrate` 
-4. Get API data with `python manage.py seed_data` 
-5. Load models with `python manage.py load_data`
+4. Get API data with `python manage.py fetch_data` 
+5. Load models with `python manage.py seed_data`
 6. Finally, run the server locally with `python manage.py runserver`
 
 ## Screenshots
@@ -46,8 +46,8 @@ List View
 Analytics Dashboard
 
 ## Contributions
-Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM
-Tony Guillen - implemented bootsrap 5 ui and css to style the pages
-Eric Pengili - Security, settings, deployment readiness
-Luke Salem - Analytics Dashboard and added second and third models along with the seed script and analytics.html contributions
+Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
+Tony Guillen - Templates HTML Implementation,Bootstrap 5 UI, CSS
+Eric Pengili - Security, Settings, Deployment Readiness, Alternative MyApp application  
+Luke Salem - Analytics Dashboard, Models ORM 
 
