@@ -38,12 +38,14 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
 6. Finally, run the server locally with `python manage.py runserver`
 
 ## Screenshots
-TO BE IMPLEMENTED  
-Homepage
-
-List View
-
-Analytics Dashboard
+Homepage  
+![Home Page](screenshots/homepage.png)  
+List View  
+![List View](screenshots/listview.png)  
+Analytics Dashboard  
+![Analytics Dashboard](screenshots/analyticsdashboard.png)  
+Security (manage.py check --deploy)
+![Deploy Check](screenshots/securitycheck.png)  
 
 ## Contributions
 Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
