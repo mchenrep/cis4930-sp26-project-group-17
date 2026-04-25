@@ -1,0 +1,12 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h2>Home</h2>
+    <p>This starter Django app is ready for local development and deployment setup.</p>
+    <p>Total items: <strong>{{ item_count }}</strong></p>
+    <a class="button" href="{% url 'item_list' %}">View Items</a>
+</section>
+{% endblock %}

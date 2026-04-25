@@ -30,11 +30,12 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
     - Implements Bootstrap 5 UI features and CSS to style pages
 
 ## Setup Instructions
-1. First clone the repository with `git clone repositoryURL`
-2. Install the requirements/dependencies with `pip install -r requirements.txt`
-3. Migrate all models with `python manage.py migrate`
-4. Seed data with `python manage.py seed_data`
-5. Finally, run the server locally with `python manage.py runserver`
+1. First clone the repository with `git clone repositoryURL`  
+2. Install the requirements/dependencies with `pip install -r requirements.txt`  
+3. Migrate all models with `python manage.py migrate` 
+4. Get API data with `python manage.py fetch_data` 
+5. Load models with `python manage.py seed_data`
+6. Finally, run the server locally with `python manage.py runserver`
 
 ## Screenshots
 TO BE IMPLEMENTED  
@@ -45,8 +46,8 @@ List View
 Analytics Dashboard
 
 ## Contributions
-Matthew Chen - Framework Setup/Repository Structure, README, URL routing, API-Integration  
-X - CRUD-views, CSS/Bootstrap-UI  
-X - Models-ORM, Analytics Dashboard  
-X - Settings-Deploy, Extra Credit
+Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
+Tony Guillen - Templates HTML Implementation,Bootstrap 5 UI, CSS
+Eric Pengili - Security, Settings, Deployment Readiness, Alternative MyApp application  
+Luke Salem - Analytics Dashboard, Models ORM 
 

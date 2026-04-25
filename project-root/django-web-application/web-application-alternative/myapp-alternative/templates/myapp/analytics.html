@@ -1,0 +1,20 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+<section class="card">
+    <h2>Analytics</h2>
+    <p>Total items: <strong>{{ total_items }}</strong></p>
+    <p>Total value: <strong>${{ total_value }}</strong></p>
+
+    <h3>Items by Category</h3>
+    <ul>
+        {% for row in categories %}
+            <li>{{ row.category|default:"Uncategorized" }}: {{ row.count }}</li>
+        {% empty %}
+            <li>No category data yet.</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
