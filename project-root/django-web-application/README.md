@@ -49,7 +49,6 @@ Security (manage.py check --deploy)
 
 ## Contributions
 Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
-Tony Guillen - Templates HTML Implementation, Bootstrap 5 UI, CSS, Charts
+Tony Guillen - Templates HTML Implementation, Bootstrap 5 UI, CSS, Charts  
 Eric Pengili - Security, Settings, Deployment Readiness, Alternative MyApp application  
-Luke Salem - Analytics Dashboard, Models ORM, Charts
-
+Luke Salem - Analytics Dashboard, Models ORM, Charts  
