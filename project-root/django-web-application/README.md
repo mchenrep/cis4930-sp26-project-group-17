@@ -23,9 +23,9 @@ data in a meaningful way (from Project 1) in a web application based on the Djan
 - Detailed View of Basketball Repositories
     - Shows a detailed description of the basketball related Github repository of interest
 - Analytics Page
-    - Utilizes pandas module to create meaningful aggregations of basketball data from the NBA 2000-2009 seasons
-    - Charts to visualize basketball data from the dataset in a meaningful way
-    - Summary statistics table of basketball data from the dataset (which includes count, mean, min, max)
+    - Utilizes pandas module to create meaningful aggregations of basketball related repositories
+    - Charts to visualize data from basketball related repositories (stars, language, etc.)
+    - Summary statistics table of basketball related repositories (which includes count, mean, min, max)
 - UI
     - Implements Bootstrap 5 UI features and CSS to style pages
 
