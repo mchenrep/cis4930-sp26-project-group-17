@@ -128,27 +128,10 @@
 </div>
 
 <div class="row g-4">
-    <div class="col-lg-7">
+    <div class="col-lg-6">
         <div class="card shadow-sm h-100">
             <div class="card-header bg-white">
-                <h5 class="mb-0">
-                    <i class="bi bi-graph-up text-danger"></i> Average Points by Year
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="chart-wrapper">
-                    <canvas id="nbaTrendChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-5">
-        <div class="card shadow-sm h-100">
-            <div class="card-header bg-white">
-                <h5 class="mb-0">
-                    <i class="bi bi-trophy-fill text-warning"></i> Top 10 by Efficiency
-                </h5>
+                <h5 class="mb-0"><i class="bi bi-trophy-fill text-warning"></i> Most Efficient Players</h5>
             </div>
             <div class="card-body">
                 <div class="chart-wrapper">
@@ -157,8 +140,20 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-graph-up text-danger"></i> Scoring vs. Efficiency</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrapper">
+                    <canvas id="nbaScatterChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-{% endif %}
 
 <hr class="my-5">
 <h2 class="mb-4">Project Insights</h2>
@@ -185,6 +180,7 @@
     </ul>
 </div>
 
+{% endif %}
 {% endif %}
 {% endblock %}
 
@@ -243,6 +239,46 @@
             plugins: { legend: { position: 'bottom' } }
         }
     });
+
+    {% if not nba_empty %}
+    const effData = {{ eff_bar_json|safe }};
+    const scatterData = {{ scatter_json|safe }};
+
+    // Chart 3: Top 10 Efficiency (via bar chart))
+    new Chart(document.getElementById('nbaEffChart'), {
+        type: 'bar',
+        data: {
+            labels: effData.labels,
+            datasets: [{
+                label: 'Average EFF Rating',
+                data: effData.values,
+                backgroundColor: 'rgba(255, 193, 7, 0.7)',
+                borderColor: 'rgba(255, 193, 7, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Chart 4: Scoring vs Efficiency (via scatter chart - "different type"/bonus credit)
+    new Chart(document.getElementById('nbaScatterChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Players (Avg PTS vs EFF)',
+                data: scatterData,
+                backgroundColor: 'rgba(220, 53, 69, 0.6)'
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                x: { title: { display: true, text: 'Average Points Per Game (PTS)' } },
+                y: { title: { display: true, text: 'Average Efficiency (EFF)' } }
+            }
+        }
+    });
+    {% endif %}
 </script>
 {% endif %}
 {% endblock %}

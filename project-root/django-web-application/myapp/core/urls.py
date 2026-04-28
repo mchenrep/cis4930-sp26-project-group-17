@@ -10,3 +10,5 @@ urlpatterns = [
     path('repos/<int:pk>/delete/', views.repo_delete, name='repo_delete'),
     path('analytics/', views.analytics, name='analytics'),
 ]
+
+path('fetch/', views.trigger_fetch, name='trigger_fetch')
