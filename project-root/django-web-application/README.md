@@ -50,6 +50,8 @@ Security (manage.py check --deploy)
 ## Project Demonstration
 Matthew Chen - [Youtube Link](https://youtu.be/C22R1EuAXkA)
 
+Luke Salem - [Youtube Link](https://youtu.be/khD4dP34KjE)
+
 ## Contributions
 Matthew Chen - Framework Setup/Repository Structure, README, Basic URL Routing, Models ORM, fetch_data.py, seed_data.py 
 Tony Guillen - Templates HTML Implementation, Bootstrap 5 UI, CSS, Charts  
