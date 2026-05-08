@@ -202,7 +202,7 @@ def analytics(request):
             'values': top_eff['eff'].round(2).tolist()
         }
         
-        # Are scoring and efficiency related? (Aggregation 3) - groupig by player to get avg PTS and EFF (Scatter plot)
+        # Are scoring and efficiency related? (Aggregation 3) - grouping by player to get avg PTS and EFF (Scatter plot)
         pts_eff_scatter = df_nba.groupby('player')[['pts', 'eff']].mean().reset_index()
         scatter_data = [{'x': round(row['pts'], 2), 'y': round(row['eff'], 2)} for _, row in pts_eff_scatter.iterrows()]
 
